@@ -1,0 +1,11 @@
+/.vs
+/readme
+/x64
+/SControlServer/x64
+/SControlServer/SControlServer.vcxproj.user
+/SControlServer/SControlServer.vcxproj.filters
+/SControlNetWork/SControlNetWork.vcxproj.user
+/SControlNetWork/SControlNetWork.vcxproj.filters
+/SControlClient/x64
+/SControlClient/SControlClient.vcxproj.user
+/SControlClient/SControlClient.vcxproj.filters
