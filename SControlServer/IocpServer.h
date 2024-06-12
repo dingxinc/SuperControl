@@ -133,6 +133,7 @@ private:
 		DWORD transferred;
 		ULONG_PTR completionKey;
 		LPOVERLAPPED lpOverlapped;
+		//这个时候系统开启了完成端口检测
 		while (GetQueuedCompletionStatus(m_HIOCP, &transferred, &completionKey, &lpOverlapped, INFINITE))
 		{
 			ULONGLONG t1{}, t2{};
@@ -146,12 +147,13 @@ private:
 			switch (pOverlapped->m_operator)
 			{
 				//让线程池处理连接事物
-				case CMOperator::MAccept:
+				case CMOperator::MAccept:   // 这是通过模板参数传递过来的
 				{
 					ACCEPTOVERLAPPED* po = (ACCEPTOVERLAPPED*)pOverlapped;
 					m_pool.DispatchWork(CMWork(po, (MT_FUNC)&ACCEPTOVERLAPPED::Func));
 					break;
 				}
+					
 				//让线程池处理接收事物
 				case CMOperator::MRecv:
 				{
@@ -199,7 +201,7 @@ private:
 public:
 	/* 线程池初始化了 10 个 线程 */
 	CIocpServer() : m_pool(10) , m_HIOCP(INVALID_HANDLE_VALUE)
-	{ 
+	{
 		
 		InitEnv();
 		CreateSocket();

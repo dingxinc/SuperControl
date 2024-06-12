@@ -385,7 +385,6 @@ void CFileMangerDlg::OnNMDblclkTreeDir(NMHDR* pNMHDR, LRESULT* pResult)
 	}
 	/* 关闭套接字 */
 	clientSock.CloseSocket();
-
 }
 
 
